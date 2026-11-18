@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HemaHealth — AR learning app for sickle cell disease</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=DM+Serif+Display&family=JetBrains+Mono&display=swap" rel="stylesheet">
+<style>
+  :root{--red:#C0392B;--red-dk:#7B241C;--red-lt:#FDECEA;--grn:#1A7A3F;--grn-lt:#E9F7EF;--amber:#C96A0A;--dark:#12131A;--body:#3A3A4A;--sub:#8A8AA0;--line:#E8E8F0;--bg:#F6F6FA}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'DM Sans',system-ui,sans-serif;color:var(--body);background:var(--bg);line-height:1.6}
+  a{color:inherit}
+  .hero{background:var(--dark);color:#fff;padding:72px 24px 88px}
+  .wrap{max-width:960px;margin:0 auto}
+  .mark{display:inline-flex;align-items:center;gap:10px;font-weight:600;letter-spacing:.02em}
+  .mark span{width:32px;height:32px;border-radius:10px;background:var(--red);display:grid;place-items:center;font-family:'DM Serif Display',serif;font-size:18px}
+  h1{font-family:'DM Serif Display',serif;font-weight:400;font-size:clamp(36px,6vw,56px);line-height:1.1;margin:40px 0 16px;max-width:14ch}
+  .lead{font-size:18px;color:#C9C9D6;max-width:56ch}
+  .meta{display:flex;flex-wrap:wrap;gap:8px;margin-top:28px}
+  .tag{font-family:'JetBrains Mono',monospace;font-size:12px;padding:6px 10px;border:1px solid #2E3040;border-radius:999px;color:#C9C9D6}
+  main{margin-top:-48px;padding:0 24px 64px}
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
+  .card{display:flex;flex-direction:column;background:#fff;border:1px solid var(--line);border-radius:16px;padding:24px;text-decoration:none;transition:transform .15s ease,box-shadow .15s ease}
+  .card:hover,.card:focus-visible{transform:translateY(-2px);box-shadow:0 8px 24px rgba(18,19,26,.08)}
+  .card:focus-visible{outline:3px solid var(--red);outline-offset:2px}
+  .dot{width:10px;height:10px;border-radius:50%;margin-bottom:20px}
+  .card h2{font-family:'DM Serif Display',serif;font-weight:400;font-size:22px;color:var(--dark);margin-bottom:6px}
+  .card p{font-size:14px;color:var(--body);flex:1}
+  .go{margin-top:20px;font-size:14px;font-weight:600;color:var(--red-dk)}
+  section{margin-top:56px}
+  h3{font-family:'DM Serif Display',serif;font-weight:400;font-size:28px;color:var(--dark);margin-bottom:16px}
+  .cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:24px}
+  .cols p{font-size:15px}
+  .cols strong{display:block;color:var(--dark);margin-bottom:4px}
+  footer{border-top:1px solid var(--line);padding:24px;font-size:13px;color:var(--sub)}
+  footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+  @media (prefers-reduced-motion:reduce){.card{transition:none}.card:hover{transform:none}}
+</style>
+</head>
+<body>
+<header class="hero">
+  <div class="wrap">
+    <div class="mark"><span>H</span>HemaHealth</div>
+    <h1>Seeing sickle cell disease, not just reading about it</h1>
+    <p class="lead">A mobile AR learning app that lets people compare healthy and sickle red blood cells as 3D models, then check what they've learned with a short quiz. Designed in Figma, prototyped in HTML, built for Unity.</p>
+    <div class="meta">
+      <span class="tag">Product design</span><span class="tag">AR / Unity</span><span class="tag">Design system</span><span class="tag">Health education</span>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+    <nav class="grid" aria-label="Project screens">
+      <a class="card" href="mockup.html">
+        <i class="dot" style="background:var(--red)"></i>
+        <h2>App mockup</h2>
+        <p>The core flow: main menu, AR module, the cell views, 2D mode, quiz and user profile.</p>
+        <span class="go">Open screens →</span>
+      </a>
+      <a class="card" href="ui-kit.html">
+        <i class="dot" style="background:var(--dark)"></i>
+        <h2>UI kit</h2>
+        <p>Colour tokens, type scale, spacing, radius and components, mapped to Unity TextMeshPro styles for handoff.</p>
+        <span class="go">Open UI kit →</span>
+      </a>
+      <a class="card" href="quiz.html">
+        <i class="dot" style="background:var(--grn)"></i>
+        <h2>Knowledge quiz</h2>
+        <p>A short overview with 3D cell models, followed by five questions with instant feedback.</p>
+        <span class="go">Take the quiz →</span>
+      </a>
+      <a class="card" href="explainer.html">
+        <i class="dot" style="background:var(--amber)"></i>
+        <h2>2D explainer</h2>
+        <p>A flat, labelled version of the content for people who can't or don't want to use AR.</p>
+        <span class="go">Read explainer →</span>
+      </a>
+    </nav>
+
+    <section>
+      <h3>Design decisions</h3>
+      <div class="cols">
+        <p><strong>Compare, don't lecture</strong>Healthy and sickle cells sit side by side, and the difference in shape carries the explanation. Text appears only when someone taps a cell.</p>
+        <p><strong>AR is optional</strong>Every AR module has a 2D path, so the content still works on older phones, in poor light, and for people who get motion sickness.</p>
+        <p><strong>One token set, two platforms</strong>The same colour and type tokens drive the HTML prototypes and the Unity build, so what gets reviewed is what gets shipped.</p>
+      </div>
+    </section>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>University project · Yuliya S</span>
+    <a href="https://www.linkedin.com/in/yuliya-s-uxui">LinkedIn</a>
+  </div>
+</footer>
+</body>
+</html>

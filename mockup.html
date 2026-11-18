@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HemaHealth — UI Mockup v2</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --red:#C0392B;--red-dk:#7B241C;--red-lt:#FDECEA;
+  --grn:#1A7A3F;--grn-lt:#E9F7EF;
+  --dark:#12131A;--body:#3A3A4A;--sub:#8A8AA0;
+  --border:#E8E8F0;--bg:#F6F6FA;--white:#FFFFFF;
+  --amber:#C96A0A;--amber-bg:#FEF3E2;
+  --shadow:0 2px 16px rgba(18,19,26,.08);
+}
+body{background:#DDDDE8;font-family:'DM Sans',sans-serif;display:flex;flex-direction:column;align-items:center;gap:40px;padding:40px 20px 80px}
+.phone{width:390px;min-height:844px;background:var(--bg);border-radius:44px;overflow:hidden;box-shadow:0 24px 80px rgba(0,0,0,.18),0 0 0 10px #1a1a2e;position:relative;display:flex;flex-direction:column}
+.screen{display:none;flex-direction:column;flex:1}
+.screen.active{display:flex}
+.status{height:44px;display:flex;align-items:center;justify-content:space-between;padding:0 24px;font-size:12px;font-weight:600;color:var(--dark);flex-shrink:0}
+.status.lt{color:#fff}
+.topbar{height:56px;display:flex;align-items:center;padding:0 20px;gap:12px;flex-shrink:0}
+.back{width:36px;height:36px;border-radius:50%;border:none;background:var(--border);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:18px;color:var(--dark);transition:background .15s;font-family:'DM Sans',sans-serif}
+.back:hover{background:#d4d4e4}
+.bar-title{font-size:17px;font-weight:600;color:var(--dark);flex:1;text-align:center;margin-right:36px}
+.scroll{flex:1;overflow-y:auto;padding:0 20px 32px}
+.scroll::-webkit-scrollbar{display:none}
+.sec-label{font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--sub);margin:20px 0 10px}
+
+/* MAIN MENU */
+.hero{background:linear-gradient(145deg,#12131A 0%,#1E1F32 60%,#2A1A2E 100%);padding:48px 24px 36px;position:relative;overflow:hidden;flex-shrink:0}
+.hero::before{content:'';position:absolute;width:220px;height:220px;border-radius:50%;background:radial-gradient(circle,rgba(192,57,43,.22) 0%,transparent 70%);top:-40px;right:-40px}
+.logo-row{display:flex;align-items:center;gap:10px;margin-bottom:28px;position:relative;z-index:1}
+.logo-mark{width:32px;height:32px;border-radius:9px;background:var(--red);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800;color:#fff}
+.app-name{font-family:'DM Serif Display',serif;font-size:22px;color:#fff}
+.hero-h{font-family:'DM Serif Display',serif;font-size:28px;color:#fff;line-height:1.25;margin-bottom:6px;position:relative;z-index:1}
+.hero-s{font-size:13px;color:rgba(255,255,255,.5);line-height:1.5;position:relative;z-index:1}
+.menu-wrap{padding:20px 20px 32px;display:flex;flex-direction:column;gap:12px}
+.main-btn{border-radius:16px;padding:20px 22px;cursor:pointer;transition:transform .15s,box-shadow .15s;border:none;text-align:left;width:100%;font-family:'DM Sans',sans-serif}
+.main-btn:active{transform:scale(.98)}
+.main-btn.pri{background:var(--red-dk);box-shadow:0 4px 20px rgba(123,36,28,.3)}
+.main-btn.pri:hover{transform:translateY(-1px);box-shadow:0 8px 28px rgba(123,36,28,.38)}
+.main-btn.sec{background:var(--white);border:1.5px solid var(--border);box-shadow:var(--shadow)}
+.main-btn.sec:hover{border-color:var(--red);transform:translateY(-1px)}
+.btn-t{font-size:17px;font-weight:700;margin-bottom:3px}
+.main-btn.pri .btn-t{color:#fff}
+.main-btn.sec .btn-t{color:var(--dark)}
+.btn-s{font-size:12px;line-height:1.4}
+.main-btn.pri .btn-s{color:rgba(255,255,255,.55)}
+.main-btn.sec .btn-s{color:var(--sub)}
+
+/* AR MODULE */
+.ar-opt{background:var(--white);border-radius:14px;border:1.5px solid var(--border);padding:16px 18px;cursor:pointer;margin-bottom:10px;transition:all .15s;box-shadow:var(--shadow);text-align:left;width:100%;font-family:'DM Sans',sans-serif;display:flex;justify-content:space-between;align-items:center}
+.ar-opt:hover{border-color:var(--red);transform:translateY(-1px)}
+.ar-opt:active{transform:scale(.98)}
+.ar-opt-t{font-size:15px;font-weight:600;color:var(--dark);margin-bottom:2px}
+.ar-opt-s{font-size:12px;color:var(--sub)}
+.arr{font-size:18px;color:var(--sub);flex-shrink:0}
+
+/* AR VIEW */
+.ar-cam{flex:1;background:linear-gradient(160deg,#1a1a2e 0%,#2d1b3d 40%,#1a2e2a 100%);position:relative;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.cbtn{background:none;border:none;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:8px;position:absolute}
+.hp{left:28%;top:38%;transform:translate(-50%,-50%)}
+.sp{right:22%;top:56%;transform:translate(50%,-50%)}
+.sh{width:70px;height:70px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#ff6b6b,#C0392B 60%,#7B241C);box-shadow:0 0 30px rgba(192,57,43,.5);animation:fy 3s ease-in-out infinite;position:relative}
+.sh::after{content:'';position:absolute;width:34px;height:22px;border-radius:50%;background:rgba(0,0,0,.22);top:50%;left:50%;transform:translate(-50%,-50%)}
+.ss{width:80px;height:30px;border-radius:999px 999px 999px 4px;background:linear-gradient(135deg,#8B1A1A,#5A0F0F);box-shadow:0 0 24px rgba(139,26,26,.4);animation:fs 3.5s ease-in-out infinite .5s;transform:rotate(-20deg)}
+@keyframes fy{0%,100%{transform:translateY(0)}50%{transform:translateY(-9px)}}
+@keyframes fs{0%,100%{transform:rotate(-20deg) translateY(0)}50%{transform:rotate(-20deg) translateY(-9px)}}
+.clbl{font-size:11px;font-weight:600;color:rgba(255,255,255,.75);letter-spacing:.05em;text-shadow:0 1px 4px rgba(0,0,0,.5)}
+.hint{position:absolute;bottom:24px;left:50%;transform:translateX(-50%);background:rgba(18,19,26,.72);backdrop-filter:blur(8px);border-radius:999px;padding:8px 18px;font-size:12px;font-weight:500;color:rgba(255,255,255,.85);white-space:nowrap;animation:pulse 2s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.55}}
+.pt{position:absolute;border-radius:50%;background:rgba(255,200,100,.55);animation:pd linear infinite}
+@keyframes pd{0%{transform:translateY(0) translateX(0);opacity:.7}100%{transform:translateY(-55px) translateX(18px);opacity:0}}
+.back-ov{position:absolute;top:52px;left:16px;z-index:6;background:rgba(18,19,26,.58);border:none;border-radius:50%;width:36px;height:36px;color:#fff;font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;font-family:'DM Sans',sans-serif}
+
+/* POP-UP */
+.bd{position:absolute;inset:0;background:rgba(18,19,26,.48);z-index:10;display:none;align-items:flex-end}
+.bd.on{display:flex}
+.pc{width:100%;background:var(--white);border-radius:24px 24px 0 0;overflow:hidden;transform:translateY(100%);transition:transform .28s cubic-bezier(.2,.8,.3,1);max-height:76vh;display:flex;flex-direction:column}
+.bd.on .pc{transform:translateY(0)}
+.phd{padding:18px 20px 16px;display:flex;align-items:center;justify-content:space-between;flex-shrink:0}
+.phd.g{background:var(--grn)}.phd.r{background:var(--red)}
+.pt2{font-size:17px;font-weight:700;color:#fff}
+.px{width:30px;height:30px;border-radius:50%;border:none;background:rgba(255,255,255,.2);color:#fff;font-size:15px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.pb2{padding:18px 20px;overflow-y:auto;flex:1}
+.pb2::-webkit-scrollbar{display:none}
+.ptxt{font-size:14px;line-height:1.65;color:var(--body);margin-bottom:16px}
+.tipbox{background:var(--amber-bg);border-radius:12px;padding:12px 14px}
+.tiplbl{font-size:10px;font-weight:700;color:var(--amber);letter-spacing:.07em;text-transform:uppercase;margin-bottom:3px}
+.tiptxt{font-size:13px;line-height:1.5;color:var(--body);font-style:italic}
+
+/* QUIZ */
+.qhd{background:var(--dark);padding:16px 20px 20px;flex-shrink:0}
+.qmeta{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.qnum{font-size:11px;font-weight:600;color:rgba(255,255,255,.45);letter-spacing:.07em;text-transform:uppercase}
+.qsc{font-size:13px;font-weight:600;color:rgba(255,255,255,.65)}
+.pbar{height:3px;background:rgba(255,255,255,.12);border-radius:999px;overflow:hidden}
+.pfill{height:100%;background:var(--red);border-radius:999px;transition:width .4s ease}
+.qtxt2{font-family:'DM Serif Display',serif;font-size:19px;color:#fff;line-height:1.3;margin-top:14px}
+.qopts{padding:20px;display:flex;flex-direction:column;gap:10px;flex:1}
+.qopt{border:1.5px solid var(--border);border-radius:14px;padding:13px 16px;display:flex;align-items:center;gap:12px;cursor:pointer;background:var(--white);transition:all .16s;text-align:left;width:100%;font-family:'DM Sans',sans-serif}
+.qopt:hover{border-color:var(--red);background:var(--red-lt)}
+.qopt.ok{border-color:var(--grn);background:var(--grn-lt)}
+.qopt.bad{border-color:var(--red);background:var(--red-lt)}
+.qopt.off{pointer-events:none;opacity:.5}
+.qltr{width:26px;height:26px;border-radius:7px;background:var(--bg);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:var(--sub);flex-shrink:0;transition:all .16s}
+.qopt.ok .qltr{background:var(--grn);color:#fff}
+.qopt.bad .qltr{background:var(--red);color:#fff}
+.qtxt3{font-size:14px;font-weight:500;color:var(--dark)}
+.qnext{margin:0 20px 24px;padding:15px;background:var(--dark);color:#fff;border:none;border-radius:13px;font-size:15px;font-weight:600;cursor:pointer;display:none;font-family:'DM Sans',sans-serif;transition:background .15s}
+.qnext.show{display:block}
+.qnext:hover{background:#2a2b3a}
+.results{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px 24px;gap:14px;text-align:center}
+.remi{font-size:60px;margin-bottom:4px}
+.rtitle{font-family:'DM Serif Display',serif;font-size:26px;color:var(--dark)}
+.rsc{font-size:46px;font-weight:700;color:var(--red-dk)}
+.rbadge{padding:7px 18px;border-radius:999px;font-size:13px;font-weight:600}
+.bg-gold{background:#FEF3C7;color:#92400E}.bg-sil{background:#F1F5F9;color:#475569}.bg-try{background:var(--red-lt);color:var(--red-dk)}
+.rsub{font-size:14px;color:var(--sub);line-height:1.5}
+.retry{width:100%;padding:15px;background:var(--red);color:#fff;border:none;border-radius:13px;font-size:14px;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif}
+.retry:hover{background:var(--red-dk)}
+
+/* USER PROFILE */
+.phero{background:linear-gradient(145deg,#12131A,#1E1F32);padding:28px 22px 24px;display:flex;align-items:center;gap:16px;position:relative;overflow:hidden;flex-shrink:0}
+.phero::before{content:'';position:absolute;width:160px;height:160px;border-radius:50%;background:radial-gradient(circle,rgba(192,57,43,.28) 0%,transparent 70%);top:-50px;right:-30px}
+.avatar{width:52px;height:52px;border-radius:50%;background:var(--red);border:2px solid rgba(255,255,255,.25);display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:700;color:#fff;flex-shrink:0;position:relative;z-index:1}
+.pname{font-size:17px;font-weight:700;color:#fff;margin-bottom:1px;position:relative;z-index:1}
+.pcond{font-size:12px;color:rgba(255,255,255,.5);position:relative;z-index:1}
+.plist{padding:16px 20px 32px;display:flex;flex-direction:column;gap:10px}
+.pitem{background:var(--white);border-radius:14px;border:1.5px solid var(--border);padding:16px 18px;display:flex;align-items:center;justify-content:space-between;cursor:pointer;transition:all .15s;box-shadow:var(--shadow);text-align:left;width:100%;font-family:'DM Sans',sans-serif}
+.pitem:hover{border-color:var(--red);transform:translateY(-1px)}
+.pitem:active{transform:scale(.98)}
+.pit{font-size:15px;font-weight:600;color:var(--dark);text-align:left}
+.pis{font-size:12px;color:var(--sub);margin-top:1px;text-align:left}
+.parr{font-size:18px;color:var(--sub)}
+
+/* 2D VIEW */
+.td-card{background:var(--white);border-radius:16px;border:1.5px solid var(--border);overflow:hidden;margin-bottom:12px;box-shadow:var(--shadow)}
+.td-hd{padding:13px 18px}.td-hd.g{background:var(--grn)}.td-hd.r{background:var(--red)}
+.td-hd-t{font-size:15px;font-weight:700;color:#fff}
+.td-ill{height:110px;display:flex;align-items:center;justify-content:center;background:var(--bg);border-bottom:1px solid var(--border)}
+.c2h{width:84px;height:84px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#ff8a80,var(--red) 60%);position:relative;box-shadow:0 4px 16px rgba(192,57,43,.25)}
+.c2h::after{content:'';position:absolute;width:40px;height:24px;border-radius:50%;background:rgba(0,0,0,.2);top:50%;left:50%;transform:translate(-50%,-50%)}
+.c2s{width:110px;height:36px;border-radius:999px 999px 999px 5px;background:linear-gradient(135deg,#8B1A1A,#5A0F0F);transform:rotate(-15deg);box-shadow:0 4px 16px rgba(139,26,26,.25)}
+.td-body{padding:14px 18px}
+.tag{display:inline-block;font-size:10px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;padding:3px 9px;border-radius:999px;margin-bottom:7px}
+.tag-g{background:var(--grn-lt);color:var(--grn)}.tag-r{background:var(--red-lt);color:var(--red-dk)}
+.td-txt{font-size:13px;line-height:1.6;color:var(--body)}
+.cmp{width:100%;border-collapse:collapse;font-size:13px}
+.cmp td{padding:9px 14px;border-bottom:1px solid var(--border)}
+.cmp tr:last-child td{border-bottom:none}
+
+/* NAV */
+.pg-title{font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#7070A0;text-align:center;margin-bottom:8px}
+.nav-row{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-bottom:4px}
+.nb{padding:7px 16px;border-radius:999px;border:none;background:var(--white);color:var(--dark);font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,.09);transition:all .14s}
+.nb:hover{background:var(--dark);color:#fff}
+.nb.on{background:var(--red);color:#fff}
+</style>
+</head>
+<body>
+
+<div>
+  <p class="pg-title">HemaHealth — UI Mockup v2</p>
+  <div class="nav-row">
+    <button class="nb on" onclick="go('main')">Main Menu</button>
+    <button class="nb" onclick="go('armenu')">AR Module</button>
+    <button class="nb" onclick="go('arview')">AR View</button>
+    <button class="nb" onclick="go('quiz')">Quiz</button>
+    <button class="nb" onclick="go('twoD')">2D View</button>
+    <button class="nb" onclick="go('profile')">User Profile</button>
+  </div>
+</div>
+
+<div class="phone">
+
+  <!-- MAIN MENU -->
+  <div class="screen active" id="s-main">
+    <div class="status lt" style="background:#12131A">9:41 <span>●●●</span> <span>100%</span></div>
+    <div class="hero">
+      <div class="logo-row">
+        <div class="logo-mark">H</div>
+        <span class="app-name">HemaHealth</span>
+      </div>
+      <div class="hero-h">Learn about<br>Sickle Cell Disease</div>
+      <div class="hero-s">Explore blood cells in AR — tap, learn, test your knowledge.</div>
+    </div>
+    <div class="menu-wrap">
+      <p class="sec-label">Choose a module</p>
+      <button class="main-btn pri" onclick="go('armenu')">
+        <div class="btn-t">AR Module</div>
+        <div class="btn-s">Explore 3D cell models in augmented reality. Tap to discover differences.</div>
+      </button>
+      <button class="main-btn sec" onclick="go('profile')">
+        <div class="btn-t">User Profile</div>
+        <div class="btn-s">Daily logs, diary, reminders and community hub.</div>
+      </button>
+    </div>
+  </div>
+
+  <!-- AR MODULE -->
+  <div class="screen" id="s-armenu">
+    <div class="status">9:41 <span>●●●</span> <span>100%</span></div>
+    <div class="topbar">
+      <button class="back" onclick="go('main')">‹</button>
+      <div class="bar-title">AR Module</div>
+    </div>
+    <div class="scroll">
+      <p class="sec-label">How would you like to study?</p>
+      <button class="ar-opt" onclick="go('arview')">
+        <div><div class="ar-opt-t">Interactive 3D Models</div><div class="ar-opt-s">Tap cells in AR to see pop-up descriptions</div></div>
+        <span class="arr">›</span>
+      </button>
+      <button class="ar-opt" onclick="go('quiz')">
+        <div><div class="ar-opt-t">Quiz</div><div class="ar-opt-s">Test your knowledge — 3 questions</div></div>
+        <span class="arr">›</span>
+      </button>
+      <button class="ar-opt" onclick="go('twoD')">
+        <div><div class="ar-opt-t">2D View</div><div class="ar-opt-s">Flat illustrated version with labels and text</div></div>
+        <span class="arr">›</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- AR VIEW -->
+  <div class="screen" id="s-arview">
+    <div class="status lt" style="position:absolute;top:0;left:0;right:0;z-index:5;background:transparent">9:41 <span>●●●</span> <span>100%</span></div>
+    <div class="ar-cam">
+      <div class="pt" style="width:4px;height:4px;left:30%;top:30%;animation-duration:4s"></div>
+      <div class="pt" style="width:3px;height:3px;left:36%;top:42%;animation-duration:5s;animation-delay:1s"></div>
+      <div class="pt" style="width:4px;height:4px;left:68%;top:48%;animation-duration:3.5s;animation-delay:.5s"></div>
+      <button class="cbtn hp" onclick="opP('ph')">
+        <div class="sh"></div>
+        <span class="clbl">HEALTHY CELL</span>
+      </button>
+      <button class="cbtn sp" onclick="opP('ps')">
+        <div class="ss"></div>
+        <span class="clbl" style="margin-top:14px">SICKLE CELL</span>
+      </button>
+      <div class="hint">Tap a cell to explore</div>
+      <button class="back-ov" onclick="go('armenu')">‹</button>
+    </div>
+    <!-- HEALTHY POPUP -->
+    <div class="bd" id="ph" onclick="clP(event,'ph')">
+      <div class="pc">
+        <div class="phd g"><span class="pt2">Healthy Red Blood Cell</span><button class="px" onclick="clP2('ph')">✕</button></div>
+        <div class="pb2">
+          <p class="ptxt">A healthy red blood cell is shaped like a <strong>round, flat disc</strong> — flexible enough to squeeze through even the tiniest blood vessels. Inside, it carries a protein called <strong>haemoglobin</strong>, which picks up oxygen in the lungs and delivers it to every part of the body. Each cell lives for about <strong>120 days</strong> before being naturally replaced by the bone marrow.</p>
+          <div class="tipbox"><div class="tiplbl">Did you know?</div><p class="tiptxt">Your body produces around 2 million new red blood cells every second!</p></div>
+        </div>
+      </div>
+    </div>
+    <!-- SICKLE POPUP -->
+    <div class="bd" id="ps" onclick="clP(event,'ps')">
+      <div class="pc">
+        <div class="phd r"><span class="pt2">Sickle Cell</span><button class="px" onclick="clP2('ps')">✕</button></div>
+        <div class="pb2">
+          <p class="ptxt">A sickle cell is shaped like a <strong>crescent</strong> — rigid and unable to bend. This shape is caused by a change in a <strong>single gene</strong> inherited from both parents, which makes the haemoglobin inside clump together. Because sickle cells are stiff, they <strong>get stuck in blood vessels</strong> and block the flow of oxygen to the body, causing pain crises. They also die much faster — only <strong>10 to 20 days</strong> — leading to a constant shortage of red blood cells, called <strong>anaemia</strong>.</p>
+          <div class="tipbox"><div class="tiplbl">Did you know?</div><p class="tiptxt">Just one tiny DNA change — out of 3 billion — is enough to cause this difference in cell shape.</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- QUIZ -->
+  <div class="screen" id="s-quiz">
+    <div class="qhd" id="qhd">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px">
+        <button onclick="go('armenu')" style="background:rgba(255,255,255,.1);border:none;border-radius:50%;width:32px;height:32px;color:#fff;font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;font-family:'DM Sans',sans-serif">‹</button>
+        <span style="font-size:11px;font-weight:600;color:rgba(255,255,255,.4);letter-spacing:.07em;text-transform:uppercase">Quiz</span>
+      </div>
+      <div class="qmeta"><span class="qnum" id="qnum">Question 1 of 3</span><span class="qsc" id="qsc">0 / 3</span></div>
+      <div class="pbar"><div class="pfill" id="pfill" style="width:33%"></div></div>
+      <div class="qtxt2" id="qtxt"></div>
+    </div>
+    <div class="qopts" id="qopts"></div>
+    <button class="qnext" id="qnext" onclick="nextQ()">Next →</button>
+    <div class="results" id="qres" style="display:none">
+      <div class="remi" id="remi">🏆</div>
+      <div class="rtitle">Quiz Complete!</div>
+      <div class="rsc" id="rsc">3/3</div>
+      <div class="rbadge" id="rbadge">Blood Cell Expert</div>
+      <div class="rsub" id="rsub"></div>
+      <button class="retry" onclick="resetQ()">Try Again</button>
+      <button onclick="go('armenu')" style="background:none;border:none;color:var(--sub);font-size:13px;cursor:pointer;font-family:'DM Sans',sans-serif;margin-top:6px">← Back to AR Module</button>
+    </div>
+  </div>
+
+  <!-- 2D VIEW -->
+  <div class="screen" id="s-twoD">
+    <div class="status">9:41 <span>●●●</span> <span>100%</span></div>
+    <div class="topbar"><button class="back" onclick="go('armenu')">‹</button><div class="bar-title">2D View</div></div>
+    <div class="scroll">
+      <p class="sec-label">Blood Cell Comparison</p>
+      <div class="td-card">
+        <div class="td-hd g"><span class="td-hd-t">Healthy Red Blood Cell</span></div>
+        <div class="td-ill"><div class="c2h"></div></div>
+        <div class="td-body"><span class="tag tag-g">Shape · Lifespan · Function</span><p class="td-txt">A healthy red blood cell is shaped like a <strong>round, flat disc</strong> — flexible enough to squeeze through even the tiniest blood vessels. It carries <strong>haemoglobin</strong>, delivering oxygen throughout the body. Lifespan: <strong>~120 days</strong>.</p></div>
+      </div>
+      <div class="td-card">
+        <div class="td-hd r"><span class="td-hd-t">Sickle Cell</span></div>
+        <div class="td-ill"><div class="c2s"></div></div>
+        <div class="td-body"><span class="tag tag-r">Shape · Risk · Lifespan</span><p class="td-txt">A sickle cell has a <strong>crescent shape</strong> — rigid and unable to bend. It gets stuck in blood vessels, blocking oxygen flow and causing <strong>pain crises</strong>. Caused by a <strong>single gene mutation</strong>. Lifespan: only <strong>10–20 days</strong>.</p></div>
+      </div>
+      <div class="td-card">
+        <div style="padding:12px 16px;background:var(--dark)"><span style="font-size:14px;font-weight:700;color:#fff">Quick Comparison</span></div>
+        <table class="cmp">
+          <tr style="background:var(--bg)"><td style="font-weight:600;color:var(--sub);width:36%">Shape</td><td style="color:var(--grn);font-weight:600">Round disc</td><td style="color:var(--red);font-weight:600">Crescent</td></tr>
+          <tr><td style="font-weight:600;color:var(--sub)">Lifespan</td><td style="color:var(--body)">~120 days</td><td style="color:var(--body)">10–20 days</td></tr>
+          <tr style="background:var(--bg)"><td style="font-weight:600;color:var(--sub)">Flexibility</td><td style="color:var(--body)">Very flexible</td><td style="color:var(--body)">Rigid</td></tr>
+          <tr><td style="font-weight:600;color:var(--sub)">Oxygen</td><td style="color:var(--body)">Normal</td><td style="color:var(--body)">Reduced</td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- USER PROFILE -->
+  <div class="screen" id="s-profile">
+    <div class="status lt" style="background:#12131A">9:41 <span>●●●</span> <span>100%</span></div>
+    <div class="phero">
+      <div class="avatar">Y</div>
+      <div><div class="pname">Yuliia</div><div class="pcond">Sickle Cell Disease</div></div>
+    </div>
+    <div class="plist">
+      <p class="sec-label" style="margin-top:0">My Health Hub</p>
+      <button class="pitem"><div><div class="pit">Daily Log</div><div class="pis">Track mood, sleep, medication & journal</div></div><span class="parr">›</span></button>
+      <button class="pitem"><div><div class="pit">Diary</div><div class="pis">Write about your day and how you feel</div></div><span class="parr">›</span></button>
+      <button class="pitem"><div><div class="pit">Reminders</div><div class="pis">Medication, appointments, check-ins</div></div><span class="parr">›</span></button>
+      <button class="pitem"><div><div class="pit">Community Hub</div><div class="pis">Connect with others living with SCD</div></div><span class="parr">›</span></button>
+      <button onclick="go('main')" style="margin-top:4px;width:100%;padding:13px;border-radius:13px;border:1.5px solid var(--border);background:transparent;color:var(--sub);font-family:'DM Sans',sans-serif;font-size:13px;font-weight:500;cursor:pointer">← Back to Main Menu</button>
+    </div>
+  </div>
+
+</div>
+
+<script>
+function go(id){
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+  document.getElementById('s-'+id).classList.add('active');
+  const ids=['main','armenu','arview','quiz','twoD','profile'];
+  document.querySelectorAll('.nb').forEach((b,i)=>b.classList.toggle('on',ids[i]===id));
+  if(id==='quiz')resetQ();
+}
+function opP(id){document.getElementById(id).classList.add('on')}
+function clP(e,id){if(e.target===e.currentTarget)document.getElementById(id).classList.remove('on')}
+function clP2(id){document.getElementById(id).classList.remove('on')}
+
+const Qs=[
+  {q:"What protein inside red blood cells carries oxygen?",opts:["Insulin","Keratin","Haemoglobin"],ans:2},
+  {q:"Why do sickle cells block blood vessels?",opts:["They are too small","They are rigid and crescent-shaped","They carry too much oxygen"],ans:1},
+  {q:"How long does a sickle cell live compared to a healthy red blood cell?",opts:["The same — about 120 days","Longer — about 200 days","Shorter — only 10–20 days"],ans:2}
+];
+let cq=0,sc=0,dn=false;
+function renderQ(){
+  const q=Qs[cq];
+  document.getElementById('qnum').textContent=`Question ${cq+1} of ${Qs.length}`;
+  document.getElementById('qtxt').textContent=q.q;
+  document.getElementById('pfill').style.width=`${((cq+1)/Qs.length)*100}%`;
+  const c=document.getElementById('qopts');c.innerHTML='';
+  ['A','B','C'].forEach((l,i)=>{
+    const b=document.createElement('button');b.className='qopt';
+    b.innerHTML=`<span class="qltr">${l}</span><span class="qtxt3">${q.opts[i]}</span>`;
+    b.onclick=()=>pick(i);c.appendChild(b);
+  });
+  document.getElementById('qnext').classList.remove('show');dn=false;
+}
+function pick(i){
+  if(dn)return;dn=true;
+  const q=Qs[cq];
+  document.querySelectorAll('.qopt').forEach((b,j)=>{b.classList.add('off');if(j===q.ans)b.classList.add('ok');else if(j===i&&i!==q.ans)b.classList.add('bad');});
+  if(i===q.ans)sc++;
+  document.getElementById('qsc').textContent=`${sc} / ${Qs.length}`;
+  const n=document.getElementById('qnext');n.textContent=cq<Qs.length-1?'Next →':'See Results →';n.classList.add('show');
+}
+function nextQ(){cq++;if(cq>=Qs.length)showRes();else renderQ();}
+function showRes(){
+  document.getElementById('qhd').style.display='none';
+  document.getElementById('qopts').style.display='none';
+  document.getElementById('qnext').style.display='none';
+  document.getElementById('qres').style.display='flex';
+  document.getElementById('rsc').textContent=`${sc}/${Qs.length}`;
+  const p=sc/Qs.length;
+  if(p===1){document.getElementById('remi').textContent='🏆';document.getElementById('rbadge').className='rbadge bg-gold';document.getElementById('rbadge').textContent='Blood Cell Expert';document.getElementById('rsub').textContent='Outstanding! You know your cells.'}
+  else if(p>=.6){document.getElementById('remi').textContent='⭐';document.getElementById('rbadge').className='rbadge bg-sil';document.getElementById('rbadge').textContent='Cell Scholar';document.getElementById('rsub').textContent='Good work! Review pop-ups to go further.'}
+  else{document.getElementById('remi').textContent='📚';document.getElementById('rbadge').className='rbadge bg-try';document.getElementById('rbadge').textContent='Keep Exploring';document.getElementById('rsub').textContent='Tap the cells in AR to learn more, then retry!'}
+}
+function resetQ(){
+  cq=0;sc=0;dn=false;
+  document.getElementById('qhd').style.display='block';
+  document.getElementById('qopts').style.display='flex';
+  document.getElementById('qnext').style.display='none';
+  document.getElementById('qres').style.display='none';
+  document.getElementById('qsc').textContent='0 / 3';
+  renderQ();
+}
+renderQ();
+</script>
+</body>
+</html>

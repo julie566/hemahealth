@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HemaHealth — UI Kit</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=DM+Serif+Display:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --red:#C0392B;--red-dk:#7B241C;--red-lt:#FDECEA;
+  --grn:#1A7A3F;--grn-lt:#E9F7EF;
+  --dark:#12131A;--body:#3A3A4A;--sub:#8A8AA0;
+  --border:#E8E8F0;--bg:#F6F6FA;--white:#FFFFFF;
+  --amber:#C96A0A;--amber-bg:#FEF3E2;
+  --page:#EEEEF5;
+}
+body{background:var(--page);font-family:'DM Sans',sans-serif;color:var(--dark);padding:0}
+
+/* ── LAYOUT ── */
+.kit-header{background:var(--dark);padding:32px 48px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(255,255,255,.08)}
+.kit-logo{display:flex;align-items:center;gap:12px}
+.kit-mark{width:36px;height:36px;border-radius:10px;background:var(--red);display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:800;color:#fff}
+.kit-name{font-family:'DM Serif Display',serif;font-size:22px;color:#fff}
+.kit-badge{font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.4);border:1px solid rgba(255,255,255,.15);padding:4px 12px;border-radius:999px}
+
+.toc{background:var(--white);border-bottom:1px solid var(--border);padding:0 48px;display:flex;gap:0;overflow-x:auto;position:sticky;top:0;z-index:100}
+.toc::-webkit-scrollbar{display:none}
+.toc-link{padding:14px 18px;font-size:13px;font-weight:600;color:var(--sub);text-decoration:none;white-space:nowrap;border-bottom:2px solid transparent;transition:all .15s}
+.toc-link:hover{color:var(--dark)}
+.toc-link.on{color:var(--red);border-bottom-color:var(--red)}
+
+main{max-width:1120px;margin:0 auto;padding:56px 48px 120px}
+
+.section{margin-bottom:72px}
+.sec-title{font-family:'DM Serif Display',serif;font-size:28px;color:var(--dark);margin-bottom:6px}
+.sec-sub{font-size:14px;color:var(--sub);margin-bottom:32px;line-height:1.5}
+.sec-divider{height:1px;background:var(--border);margin-bottom:32px}
+
+/* ── SWATCH ── */
+.swatch-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:16px}
+.swatch{border-radius:14px;overflow:hidden;border:1px solid var(--border);background:var(--white)}
+.swatch-color{height:72px}
+.swatch-info{padding:12px 14px}
+.swatch-name{font-size:13px;font-weight:600;color:var(--dark);margin-bottom:2px}
+.swatch-hex{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--sub)}
+.swatch-use{font-size:11px;color:var(--sub);margin-top:4px;line-height:1.4}
+
+/* ── TYPE ── */
+.type-rows{display:flex;flex-direction:column;gap:12px}
+.type-row{background:var(--white);border-radius:12px;border:1px solid var(--border);padding:16px 20px;display:grid;grid-template-columns:1fr 120px 100px 100px;align-items:center;gap:16px}
+.type-row.head-row{background:var(--bg);padding:10px 20px}
+.type-meta{font-size:11px;font-weight:600;color:var(--sub);letter-spacing:.06em;text-transform:uppercase}
+.type-sample{font-size:24px;font-weight:700;color:var(--dark);font-family:'DM Serif Display',serif}
+.ts-h1{font-size:24px;font-weight:700}
+.ts-h2{font-size:20px;font-weight:600}
+.ts-h3{font-size:17px;font-weight:600}
+.ts-body{font-size:15px;font-weight:400}
+.ts-small{font-size:13px;color:var(--sub)}
+.ts-label{font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--sub)}
+.ts-btn{font-size:15px;font-weight:600}
+.ts-mono{font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--sub)}
+
+/* ── SPACING ── */
+.spacing-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:12px}
+.sp-card{background:var(--white);border-radius:12px;border:1px solid var(--border);padding:14px;text-align:center}
+.sp-vis{background:var(--red-lt);border-radius:4px;margin:0 auto 10px}
+.sp-token{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--red-dk);font-weight:500}
+.sp-px{font-size:18px;font-weight:700;color:var(--dark);margin:2px 0}
+.sp-use{font-size:11px;color:var(--sub)}
+
+/* ── RADIUS ── */
+.radius-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:12px}
+.rad-card{background:var(--white);border-radius:12px;border:1px solid var(--border);padding:16px;text-align:center}
+.rad-vis{width:56px;height:56px;background:var(--red);margin:0 auto 10px}
+.rad-token{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--red-dk);font-weight:500}
+.rad-val{font-size:18px;font-weight:700;color:var(--dark);margin:2px 0}
+.rad-use{font-size:11px;color:var(--sub)}
+
+/* ── COMPONENT BLOCKS ── */
+.comp-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.comp-grid.full{grid-template-columns:1fr}
+.comp-card{background:var(--white);border-radius:16px;border:1px solid var(--border);overflow:hidden}
+.comp-label{font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--sub);padding:14px 18px 0}
+.comp-title{font-size:15px;font-weight:600;color:var(--dark);padding:2px 18px 14px;border-bottom:1px solid var(--border)}
+.comp-demo{padding:24px 20px;display:flex;flex-direction:column;gap:14px;align-items:flex-start;background:var(--bg)}
+.comp-spec{padding:14px 18px;font-size:12px;line-height:1.7;color:var(--sub);border-top:1px solid var(--border);background:var(--white)}
+.comp-spec code{font-family:'JetBrains Mono',monospace;font-size:11px;background:var(--bg);padding:1px 5px;border-radius:4px;color:var(--dark)}
+
+/* ── ACTUAL COMPONENTS ── */
+/* Buttons */
+.btn-primary{padding:14px 24px;background:var(--red-dk);color:#fff;border:none;border-radius:14px;font-size:15px;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;width:100%;transition:background .15s}
+.btn-primary:hover{background:#6b1f17}
+.btn-secondary{padding:13px 24px;background:var(--white);color:var(--dark);border:1.5px solid var(--border);border-radius:14px;font-size:15px;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;width:100%;transition:all .15s}
+.btn-secondary:hover{border-color:var(--red)}
+
+/* Cards */
+.menu-card-demo{border-radius:14px;padding:18px 20px;cursor:pointer;border:none;text-align:left;width:100%;font-family:'DM Sans',sans-serif;transition:transform .15s}
+.menu-card-demo.p{background:var(--red-dk)}
+.menu-card-demo.s{background:var(--white);border:1.5px solid var(--border)}
+.mct{font-size:16px;font-weight:700;margin-bottom:2px}
+.menu-card-demo.p .mct{color:#fff}
+.menu-card-demo.s .mct{color:var(--dark)}
+.mcs{font-size:12px}
+.menu-card-demo.p .mcs{color:rgba(255,255,255,.55)}
+.menu-card-demo.s .mcs{color:var(--sub)}
+
+/* List item */
+.list-item{background:var(--white);border-radius:12px;border:1.5px solid var(--border);padding:14px 16px;display:flex;align-items:center;justify-content:space-between;width:100%;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .15s}
+.list-item:hover{border-color:var(--red)}
+.li-t{font-size:14px;font-weight:600;color:var(--dark);text-align:left}
+.li-s{font-size:12px;color:var(--sub)}
+.li-arr{font-size:16px;color:var(--sub)}
+
+/* Pop-up preview */
+.popup-preview{border-radius:16px;overflow:hidden;border:1px solid var(--border);width:100%}
+.pp-hd{padding:14px 16px;display:flex;justify-content:space-between;align-items:center}
+.pp-hd.g{background:var(--grn)}.pp-hd.r{background:var(--red)}
+.pp-t{font-size:15px;font-weight:700;color:#fff}
+.pp-x{width:26px;height:26px;border-radius:50%;background:rgba(255,255,255,.2);border:none;color:#fff;font-size:13px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.pp-body{padding:14px 16px;background:var(--white)}
+.pp-txt{font-size:13px;line-height:1.6;color:var(--body);margin-bottom:12px}
+.pp-tip{background:var(--amber-bg);border-radius:10px;padding:10px 12px}
+.pp-tl{font-size:10px;font-weight:700;color:var(--amber);letter-spacing:.07em;text-transform:uppercase;margin-bottom:2px}
+.pp-tt{font-size:12px;color:var(--body);font-style:italic;line-height:1.5}
+
+/* Quiz option */
+.qopt-demo{border:1.5px solid var(--border);border-radius:12px;padding:12px 14px;display:flex;align-items:center;gap:10px;background:var(--white);width:100%}
+.qopt-demo.ok{border-color:var(--grn);background:var(--grn-lt)}
+.qopt-demo.bad{border-color:var(--red);background:var(--red-lt)}
+.ql{width:24px;height:24px;border-radius:6px;background:var(--bg);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:var(--sub);flex-shrink:0}
+.qopt-demo.ok .ql{background:var(--grn);color:#fff}
+.qopt-demo.bad .ql{background:var(--red);color:#fff}
+.qt2{font-size:13px;font-weight:500;color:var(--dark)}
+
+/* Topbar preview */
+.topbar-demo{background:var(--white);border-radius:12px;border:1px solid var(--border);height:52px;display:flex;align-items:center;padding:0 16px;gap:10px;width:100%}
+.tbk{width:30px;height:30px;border-radius:50%;background:var(--border);display:flex;align-items:center;justify-content:center;font-size:15px;color:var(--dark)}
+.tbt{font-size:15px;font-weight:600;color:var(--dark);flex:1;text-align:center}
+
+/* Hero preview */
+.hero-demo{background:linear-gradient(135deg,#12131A,#1E1F32,#2A1A2E);border-radius:12px;padding:24px 20px;position:relative;overflow:hidden}
+.hero-demo::before{content:'';position:absolute;width:130px;height:130px;border-radius:50%;background:radial-gradient(circle,rgba(192,57,43,.2) 0%,transparent 70%);top:-20px;right:-20px}
+.hd-logo{display:flex;align-items:center;gap:8px;margin-bottom:16px}
+.hd-mark{width:26px;height:26px;border-radius:7px;background:var(--red);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;color:#fff}
+.hd-name{font-family:'DM Serif Display',serif;font-size:16px;color:#fff}
+.hd-h{font-family:'DM Serif Display',serif;font-size:20px;color:#fff;line-height:1.25;margin-bottom:4px}
+.hd-s{font-size:12px;color:rgba(255,255,255,.45)}
+
+/* Profile hero */
+.phero-demo{background:linear-gradient(135deg,#12131A,#1E1F32);border-radius:12px;padding:18px 20px;display:flex;align-items:center;gap:14px;position:relative;overflow:hidden}
+.phero-demo::before{content:'';position:absolute;width:100px;height:100px;border-radius:50%;background:radial-gradient(circle,rgba(192,57,43,.25) 0%,transparent 70%);top:-30px;right:-20px}
+.av{width:44px;height:44px;border-radius:50%;background:var(--red);border:2px solid rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:700;color:#fff;flex-shrink:0;position:relative;z-index:1}
+.av-name{font-size:15px;font-weight:700;color:#fff;position:relative;z-index:1}
+.av-cond{font-size:12px;color:rgba(255,255,255,.45);position:relative;z-index:1}
+
+/* AR cam preview */
+.ar-prev{border-radius:12px;overflow:hidden;background:linear-gradient(135deg,#1a1a2e,#2d1b3d,#1a2e2a);height:160px;display:flex;align-items:center;justify-content:center;position:relative;width:100%}
+.ar-cell-h{width:52px;height:52px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#ff6b6b,#C0392B 60%,#7B241C);box-shadow:0 0 20px rgba(192,57,43,.45);position:absolute;left:28%;top:50%;transform:translate(-50%,-50%)}
+.ar-cell-s{width:60px;height:22px;border-radius:999px 999px 999px 3px;background:linear-gradient(135deg,#8B1A1A,#5A0F0F);box-shadow:0 0 16px rgba(139,26,26,.4);transform:rotate(-20deg);position:absolute;right:24%;top:55%;transform:translate(50%,-50%) rotate(-20deg)}
+.ar-hint{position:absolute;bottom:12px;left:50%;transform:translateX(-50%);background:rgba(18,19,26,.72);border-radius:999px;padding:5px 14px;font-size:11px;color:rgba(255,255,255,.85);white-space:nowrap}
+
+/* ── UNITY NOTES ── */
+.unity-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.unity-card{background:var(--white);border-radius:14px;border:1px solid var(--border);padding:18px 20px}
+.unity-title{font-size:13px;font-weight:700;color:var(--dark);margin-bottom:10px;display:flex;align-items:center;gap:8px}
+.unity-badge{font-size:10px;background:var(--dark);color:#fff;padding:2px 7px;border-radius:4px;font-family:'JetBrains Mono',monospace}
+.unity-list{list-style:none;display:flex;flex-direction:column;gap:6px}
+.unity-list li{font-size:13px;color:var(--body);line-height:1.5;padding-left:14px;position:relative}
+.unity-list li::before{content:'—';position:absolute;left:0;color:var(--sub)}
+.unity-list code{font-family:'JetBrains Mono',monospace;font-size:11px;background:var(--bg);padding:1px 5px;border-radius:4px;color:var(--red-dk)}
+
+/* ── ANIM TABLE ── */
+.anim-table{width:100%;border-collapse:collapse;font-size:13px}
+.anim-table th{text-align:left;padding:10px 14px;background:var(--dark);color:rgba(255,255,255,.7);font-weight:600;font-size:11px;letter-spacing:.06em;text-transform:uppercase}
+.anim-table th:first-child{border-radius:10px 0 0 0}
+.anim-table th:last-child{border-radius:0 10px 0 0}
+.anim-table td{padding:10px 14px;border-bottom:1px solid var(--border);color:var(--body);vertical-align:top}
+.anim-table tr:nth-child(even) td{background:var(--bg)}
+.anim-table tr:last-child td{border-bottom:none}
+.anim-table code{font-family:'JetBrains Mono',monospace;font-size:11px;background:rgba(18,19,26,.06);padding:1px 5px;border-radius:4px;color:var(--dark)}
+
+@media(max-width:768px){
+  main{padding:32px 20px 80px}
+  .kit-header{padding:20px 20px}
+  .toc{padding:0 20px}
+  .comp-grid{grid-template-columns:1fr}
+  .unity-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="kit-header">
+  <div class="kit-logo">
+    <div class="kit-mark">H</div>
+    <span class="kit-name">HemaHealth</span>
+  </div>
+
+</div>
+
+<!-- TOC -->
+<nav class="toc">
+  <a class="toc-link on" href="#colors">Colors</a>
+  <a class="toc-link" href="#type">Typography</a>
+  <a class="toc-link" href="#spacing">Spacing</a>
+  <a class="toc-link" href="#radius">Radius</a>
+  <a class="toc-link" href="#components">Components</a>
+</nav>
+
+<main>
+
+  <!-- ════ COLORS ════ -->
+  <section class="section" id="colors">
+    <div class="sec-title">Color Tokens</div>
+
+
+    <div style="font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--sub);margin-bottom:12px">Primary</div>
+    <div class="swatch-grid" style="margin-bottom:28px">
+      <div class="swatch"><div class="swatch-color" style="background:#C0392B"></div><div class="swatch-info"><div class="swatch-hex">#C0392B</div><div class="swatch-use">AR button, sickle cell header</div></div></div>
+      <div class="swatch"><div class="swatch-color" style="background:#7B241C"></div><div class="swatch-info"><div class="swatch-hex">#7B241C</div><div class="swatch-use">Main menu primary button bg</div></div></div>
+      <div class="swatch"><div class="swatch-color" style="background:#FDECEA"></div><div class="swatch-info"><div class="swatch-hex">#FDECEA</div><div class="swatch-use">Sickle pop-up bg, wrong answer</div></div></div>
+      <div class="swatch"><div class="swatch-color" style="background:#1A7A3F"></div><div class="swatch-info"><div class="swatch-hex">#1A7A3F</div><div class="swatch-use">Healthy cell header</div></div></div>
+      <div class="swatch"><div class="swatch-color" style="background:#E9F7EF"></div><div class="swatch-info"><div class="swatch-hex">#E9F7EF</div><div class="swatch-use">Healthy pop-up bg, correct answer</div></div></div>
+      <div class="swatch"><div class="swatch-color" style="background:#C96A0A"></div><div class="swatch-info"><div class="swatch-hex">#C96A0A</div><div class="swatch-use">Did you know? label</div></div></div>
+      <div class="swatch"><div class="swatch-color" style="background:#FEF3E2"></div><div class="swatch-info"><div class="swatch-hex">#FEF3E2</div><div class="swatch-use">Did you know? box bg</div></div></div>
+    </div>
+
+    <div style="font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--sub);margin-bottom:12px">Neutrals</div>
+    <div class="swatch-grid">
+      <div class="swatch"><div class="swatch-color" style="background:#12131A"></div><div class="swatch-info"><div class="swatch-hex">#12131A</div><div class="swatch-use">Hero bg, quiz header, nav bar</div></div></div>
+      <div class="swatch"><div class="swatch-color" style="background:#3A3A4A"></div><div class="swatch-info"><div class="swatch-hex">#3A3A4A</div><div class="swatch-use">Body text, descriptions</div></div></div>
+      <div class="swatch"><div class="swatch-color" style="background:#8A8AA0;border:1px solid #E8E8F0"></div><div class="swatch-info"><div class="swatch-hex">#8A8AA0</div><div class="swatch-use">Subtitles, placeholders, arrows</div></div></div>
+      <div class="swatch"><div class="swatch-color" style="background:#E8E8F0"></div><div class="swatch-info"><div class="swatch-hex">#E8E8F0</div><div class="swatch-use">Card borders, dividers</div></div></div>
+      <div class="swatch"><div class="swatch-color" style="background:#F6F6FA;border:1px solid #E8E8F0"></div><div class="swatch-info"><div class="swatch-hex">#F6F6FA</div><div class="swatch-use">Screen background</div></div></div>
+      <div class="swatch"><div class="swatch-color" style="background:#FFFFFF;border:1px solid #E8E8F0"></div><div class="swatch-info"><div class="swatch-hex">#FFFFFF</div><div class="swatch-use">Card surface, pop-up bg</div></div></div>
+    </div>
+  </section>
+
+  <!-- ════ TYPOGRAPHY ════ -->
+  <section class="section" id="type">
+    <div class="sec-title">Typography</div>
+
+    <div class="type-rows">
+      <div class="type-row head-row">
+        <div class="type-meta">Style</div>
+        <div class="type-meta">Size</div>
+        <div class="type-meta">Weight</div>
+        <div class="type-meta">TMP Font</div>
+      </div>
+      <div class="type-row">
+        <div class="ts-h1" style="font-family:'DM Serif Display',serif">Screen Title</div>
+        <div style="font-size:13px;color:var(--sub)">24–28 pt</div>
+        <div style="font-size:13px;color:var(--sub)">Bold</div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--sub)">DMSerifDisplay</div>
+      </div>
+      <div class="type-row" style="background:var(--bg)">
+        <div class="ts-h2">Section Heading</div>
+        <div style="font-size:13px;color:var(--sub)">18–20 pt</div>
+        <div style="font-size:13px;color:var(--sub)">SemiBold</div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--sub)">DMSans-SemiBold</div>
+      </div>
+      <div class="type-row">
+        <div class="ts-h3">Card Title / Button</div>
+        <div style="font-size:13px;color:var(--sub)">15–17 pt</div>
+        <div style="font-size:13px;color:var(--sub)">SemiBold</div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--sub)">DMSans-SemiBold</div>
+      </div>
+      <div class="type-row" style="background:var(--bg)">
+        <div class="ts-body">Body text — pop-ups, descriptions</div>
+        <div style="font-size:13px;color:var(--sub)">14–15 pt</div>
+        <div style="font-size:13px;color:var(--sub)">Regular</div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--sub)">DMSans-Regular</div>
+      </div>
+      <div class="type-row">
+        <div class="ts-small">Small / subtitle text</div>
+        <div style="font-size:13px;color:var(--sub)">12–13 pt</div>
+        <div style="font-size:13px;color:var(--sub)">Regular</div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--sub)">DMSans-Regular</div>
+      </div>
+      <div class="type-row" style="background:var(--bg)">
+        <div class="ts-label">SECTION LABEL / CAPS TAG</div>
+        <div style="font-size:13px;color:var(--sub)">10–11 pt</div>
+        <div style="font-size:13px;color:var(--sub)">SemiBold</div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--sub)">DMSans-SemiBold</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════ SPACING ════ -->
+  <section class="section" id="spacing">
+    <div class="sec-title">Spacing Scale</div>
+    <div class="spacing-grid">
+      <div class="sp-card"><div class="sp-vis" style="width:8px;height:4px"></div><div class="sp-token">space/1</div><div class="sp-px">4px</div><div class="sp-use">Tight gaps, icon padding</div></div>
+      <div class="sp-card"><div class="sp-vis" style="width:16px;height:8px"></div><div class="sp-token">space/2</div><div class="sp-px">8px</div><div class="sp-use">Icon-to-label gap</div></div>
+      <div class="sp-card"><div class="sp-vis" style="width:24px;height:12px"></div><div class="sp-token">space/3</div><div class="sp-px">12px</div><div class="sp-use">Input padding, list gap</div></div>
+      <div class="sp-card"><div class="sp-vis" style="width:32px;height:16px"></div><div class="sp-token">space/4</div><div class="sp-px">16px</div><div class="sp-use">Default card padding</div></div>
+      <div class="sp-card"><div class="sp-vis" style="width:40px;height:20px"></div><div class="sp-token">space/5</div><div class="sp-px">20px</div><div class="sp-use">Card horizontal padding</div></div>
+      <div class="sp-card"><div class="sp-vis" style="width:48px;height:24px"></div><div class="sp-token">space/6</div><div class="sp-px">24px</div><div class="sp-use">Section spacing</div></div>
+      <div class="sp-card"><div class="sp-vis" style="width:64px;height:32px"></div><div class="sp-token">space/8</div><div class="sp-px">32px</div><div class="sp-use">Screen margin (left/right)</div></div>
+      <div class="sp-card"><div class="sp-vis" style="width:80px;height:40px"></div><div class="sp-token">space/10</div><div class="sp-px">40px</div><div class="sp-use">Large section gap</div></div>
+    </div>
+  </section>
+
+  <!-- ════ RADIUS ════ -->
+  <section class="section" id="radius">
+    <div class="sec-title">Border Radius</div>
+    <div class="radius-grid">
+      <div class="rad-card"><div class="rad-vis" style="border-radius:6px"></div><div class="rad-token">radius/sm</div><div class="rad-val">8px</div><div class="rad-use">Tags, small inputs</div></div>
+      <div class="rad-card"><div class="rad-vis" style="border-radius:10px"></div><div class="rad-token">radius/md</div><div class="rad-val">12px</div><div class="rad-use">Buttons, small cards</div></div>
+      <div class="rad-card"><div class="rad-vis" style="border-radius:14px"></div><div class="rad-token">radius/lg</div><div class="rad-val">14–16px</div><div class="rad-use">List items, main cards</div></div>
+      <div class="rad-card"><div class="rad-vis" style="border-radius:20px"></div><div class="rad-token">radius/xl</div><div class="rad-val">20–24px</div><div class="rad-use">Pop-up top corners, menu buttons</div></div>
+      <div class="rad-card"><div class="rad-vis" style="border-radius:999px;width:56px;height:32px;margin:0 auto 10px"></div><div class="rad-token">radius/full</div><div class="rad-val">999px</div><div class="rad-use">Toggles, avatar circles, pills</div></div>
+    </div>
+  </section>
+
+  <!-- ════ COMPONENTS ════ -->
+  <section class="section" id="components">
+    <div class="sec-title">Components</div>
+
+    <div class="comp-grid">
+
+      <!-- Primary button -->
+      <div class="comp-card">
+        <div class="comp-label">Button</div>
+        <div class="comp-title">Primary Button (AR Module)</div>
+        <div class="comp-demo"><button class="btn-primary">AR Module</button></div>
+        <div class="comp-spec">Height: <code>52–56px</code> · Radius: <code>14px</code> · BG: <code>#7B241C</code> · Text: white SemiBold 15pt · Pressed: scale <code>0.97</code></div>
+      </div>
+
+      <!-- Secondary button -->
+      <div class="comp-card">
+        <div class="comp-label">Button</div>
+        <div class="comp-title">Secondary Button (User Profile)</div>
+        <div class="comp-demo"><button class="btn-secondary">User Profile</button></div>
+        <div class="comp-spec">Height: <code>52–56px</code> · Radius: <code>14px</code> · BG: white · Border: <code>1.5px #E8E8F0</code> · Hover border: <code>#C0392B</code></div>
+      </div>
+
+      <!-- Hero -->
+      <div class="comp-card comp-grid full">
+        <div class="comp-label">Header</div>
+        <div class="comp-title">Main Menu Hero</div>
+        <div class="comp-demo">
+          <div class="hero-demo" style="width:100%">
+            <div class="hd-logo"><div class="hd-mark">H</div><span class="hd-name">HemaHealth</span></div>
+            <div class="hd-h">Learn about Sickle Cell Disease</div>
+            <div class="hd-s">Explore blood cells in AR — tap, learn, test your knowledge.</div>
+          </div>
+        </div>
+        <div class="comp-spec">BG gradient: <code>#12131A → #1E1F32 → #2A1A2E</code> · Logo mark: <code>32×32px radius 9px, bg #C0392B</code> · Title: DM Serif Display 28pt white · Subtitle: 13pt rgba(255,255,255,.5)</div>
+      </div>
+
+      <!-- Top bar -->
+      <div class="comp-card">
+        <div class="comp-label">Navigation</div>
+        <div class="comp-title">Top Bar</div>
+        <div class="comp-demo">
+          <div class="topbar-demo"><div class="tbk">‹</div><div class="tbt">AR Module</div></div>
+        </div>
+        <div class="comp-spec">Height: <code>56px</code> · Back btn: <code>36×36px radius 50%</code> · Title: SemiBold 17pt center · BG: white or transparent (AR view)</div>
+      </div>
+
+      <!-- Profile hero -->
+      <div class="comp-card">
+        <div class="comp-label">Header</div>
+        <div class="comp-title">User Profile Header</div>
+        <div class="comp-demo">
+          <div class="phero-demo"><div class="av">Y</div><div><div class="av-name">Yuliia</div><div class="av-cond">Sickle Cell Disease</div></div></div>
+        </div>
+        <div class="comp-spec">Avatar: <code>52×52px radius 50%</code> · BG gradient: <code>#12131A → #1E1F32</code> · Name: 17pt white Bold · Condition: 12pt rgba(255,255,255,.5)</div>
+      </div>
+
+      <!-- List item -->
+      <div class="comp-card">
+        <div class="comp-label">List</div>
+        <div class="comp-title">Menu List Item</div>
+        <div class="comp-demo" style="flex-direction:column;gap:8px;width:100%">
+          <button class="list-item"><div><div class="li-t">Daily Log</div><div class="li-s">Track mood, sleep, medication</div></div><span class="li-arr">›</span></button>
+          <button class="list-item" style="border-color:var(--red)"><div><div class="li-t">Diary</div><div class="li-s">Write about your day</div></div><span class="li-arr" style="color:var(--red)">›</span></button>
+        </div>
+        <div class="comp-spec">Height: <code>auto (min 52px)</code> · Radius: <code>14px</code> · Border: <code>1.5px #E8E8F0</code> · Hover: border <code>#C0392B</code></div>
+      </div>
+
+      <!-- AR view -->
+      <div class="comp-card comp-grid full">
+        <div class="comp-label">AR Screen</div>
+        <div class="comp-title">AR Camera View</div>
+        <div class="comp-demo"><div class="ar-prev"><div class="ar-cell-h"></div><div class="ar-cell-s"></div><div class="ar-hint">Tap a cell to explore</div></div></div>
+        <div class="comp-spec">BG: gradient <code>#1a1a2e → #2d1b3d → #1a2e2a</code> · Healthy cell: 70px sphere radial-gradient red · Sickle cell: 80×30px crescent rotated -20° · Hint: backdrop-blur pill, bottom-centre · Both cells animate float Y (9px, 3s)</div>
+      </div>
+
+      <!-- Pop-up healthy -->
+      <div class="comp-card">
+        <div class="comp-label">Pop-up</div>
+        <div class="comp-title">Healthy Cell Card</div>
+        <div class="comp-demo" style="background:#1a2e2a">
+          <div class="popup-preview">
+            <div class="pp-hd g"><span class="pp-t">Healthy Red Blood Cell</span><button class="pp-x">✕</button></div>
+            <div class="pp-body">
+              <p class="pp-txt">A healthy red blood cell is shaped like a <strong>round, flat disc</strong> — flexible enough to squeeze through even the tiniest blood vessels...</p>
+              <div class="pp-tip"><div class="pp-tl">Did you know?</div><p class="pp-tt">Your body produces around 2 million new red blood cells every second!</p></div>
+            </div>
+          </div>
+        </div>
+        <div class="comp-spec">Header BG: <code>#1A7A3F</code> · Radius: <code>24px 24px 0 0</code> · Appears from bottom (slide up 0.28s OutCubic) · Backdrop: <code>rgba(18,19,26,.48)</code></div>
+      </div>
+
+      <!-- Pop-up sickle -->
+      <div class="comp-card">
+        <div class="comp-label">Pop-up</div>
+        <div class="comp-title">Sickle Cell Card</div>
+        <div class="comp-demo" style="background:#2d1b3d">
+          <div class="popup-preview">
+            <div class="pp-hd r"><span class="pp-t">Sickle Cell</span><button class="pp-x">✕</button></div>
+            <div class="pp-body">
+              <p class="pp-txt">A sickle cell is shaped like a <strong>crescent</strong> — rigid and unable to bend. Gets stuck in blood vessels causing <strong>pain crises</strong>...</p>
+              <div class="pp-tip"><div class="pp-tl">Did you know?</div><p class="pp-tt">Just one tiny DNA change — out of 3 billion — causes this difference.</p></div>
+            </div>
+          </div>
+        </div>
+        <div class="comp-spec">Header BG: <code>#C0392B</code> · Same slide-up animation · Dismiss: tap backdrop or ✕ button · Max height: <code>76vh</code></div>
+      </div>
+
+      <!-- Quiz option -->
+      <div class="comp-card comp-grid full">
+        <div class="comp-label">Quiz</div>
+        <div class="comp-title">Answer Options — States</div>
+        <div class="comp-demo" style="flex-direction:column;gap:8px;width:100%">
+          <div class="qopt-demo"><div class="ql">A</div><span class="qt2">Insulin</span></div>
+          <div class="qopt-demo ok"><div class="ql">B</div><span class="qt2">Haemoglobin ✓ Correct</span></div>
+          <div class="qopt-demo bad"><div class="ql">C</div><span class="qt2">Keratin ✗ Wrong</span></div>
+        </div>
+        <div class="comp-spec">Default border: <code>#E8E8F0</code> · Correct: border+bg <code>#1A7A3F / #E9F7EF</code>, letter circle green · Wrong: border+bg <code>#C0392B / #FDECEA</code>, letter circle red · Radius: <code>12–14px</code></div>
+      </div>
+
+    </div>
+  </section>
+
+
+</main>
+
+<script>
+// Highlight active TOC link on scroll
+const sections = document.querySelectorAll('section[id]');
+const links = document.querySelectorAll('.toc-link');
+window.addEventListener('scroll', ()=>{
+  let current = '';
+  sections.forEach(s=>{if(window.scrollY >= s.offsetTop - 120) current = s.id});
+  links.forEach(l=>{l.classList.toggle('on', l.getAttribute('href')==='#'+current)});
+});
+links.forEach(l=>l.addEventListener('click',e=>{e.preventDefault();document.querySelector(l.getAttribute('href')).scrollIntoView({behavior:'smooth'})}));
+</script>
+</body>
+</html>
